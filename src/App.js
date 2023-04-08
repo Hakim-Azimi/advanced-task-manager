@@ -9,7 +9,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const today = new Date();
 const day = today.getDate();
-const month = today.getMonth() + 1; // در جاوا اسکریپت، ماه‌ها از 0 شروع می‌شوند
+const month = today.getMonth() + 1;
 const year = today.getFullYear();
 const todayString = day + "/" + month + "/" + year;
  
