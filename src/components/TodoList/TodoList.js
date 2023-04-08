@@ -1,25 +1,28 @@
-import './list.css'
-const Todolist = () => {
+import './list.css';
+import { useEffect } from 'react';
+const Todolist = ({tasks, remove}) => {
+  useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);
+
   return ( 
     <div className='lists'>
-      <div className='list'>
-      <p>firs task is .....</p>
-      <div className='list-btns'>
-        <button>add </button>
-      <button>edit </button>
-      <button>remove </button>
-      </div>
-      </div>
-      <div className='list'>
-      <p>firs task is .....</p>
-      <div className='list-btns'>
-        <button>add </button>
-      <button>edit </button>
-      <button>remove </button>
-      </div>
-      </div>
+
+      {tasks && tasks.map((todo)=>{
+        return (
+          <div className='list'>
+           <div className='list-title'>{todo.title}</div>
+            <div className='list-btns'>
+              
+              <button>edit </button>
+              <button onClick={remove}>remove </button>
+            </div>
+          </div>
+        )
+      })}
+
     </div>
    );
 }
- 
+
 export default Todolist;
