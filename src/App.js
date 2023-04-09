@@ -49,9 +49,13 @@ const finishedTasks = (tasks)=>{
   const filteredTasks =tasks.filter((task)=> task.done === true);
   return filteredTasks.length;
 }
+const unfinishedTasks = (tasks)=>{
+  const filteredTasks = tasks.filter((task)=> task.done !== true);
+  return filteredTasks.length;
+}
   return (
     <div className="App">
-      <Header finished = {finishedTasks(tasks)} allTasks={tasks.length}/>
+      <Header unfinished = {unfinishedTasks(tasks)} finished = {finishedTasks(tasks)} allTasks={tasks.length}/>
       <NewTodo id={task.id}  change={changeHandler} task={task} submit={submitHandler}/>
     <TodoList  completed={doneHandler} time={todayString} id={task.id} remove={removeHandler} title={task} tasks={tasks} />
     </div>
