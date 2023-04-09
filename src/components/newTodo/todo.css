@@ -17,7 +17,9 @@ form {
 }
 
 
-
+.err{
+  color: #1e1919;
+}
 
 #submit-btn{
 width: 20%;

@@ -1,5 +1,5 @@
 import "./todo.css";
-const NewTodo = ({ id,title,submit, task, change }) => {
+const NewTodo = ({ id,title,submit, task, change, error }) => {
   return (
     
     <div className="new-todo-form">
@@ -12,8 +12,13 @@ const NewTodo = ({ id,title,submit, task, change }) => {
         value={task}
         type="text" placeholder="کار امروزت چیه ..." />
          <button id="submit-btn" type="submit">ثبت کن </button>
+
+       
         
       </form>
+      {
+          error && <p className="err">{error}</p>
+        }
     </div>
   );
 };

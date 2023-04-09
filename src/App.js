@@ -1,10 +1,11 @@
 import TodoList from './components/TodoList/TodoList';
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NewTodo from './components/newTodo/NewTodo';
 import Header from './components/header/Header';
 
 function App() {
+  const [error, setError] = useState(null)
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
   const today = new Date();
@@ -13,13 +14,26 @@ const month = today.getMonth() + 1;
 const year = today.getFullYear();
 const todayString = day + "/" + month + "/" + year;
  
+useEffect(()=>{
+  const getTodos = JSON.parse(localStorage.getItem(tasks))
+  if(getTodos){
+    setTasks(getTodos)
+  }
+},[tasks]);
+
+useEffect(()=>{
+localStorage.setItem('todos', JSON.stringify(tasks)) 
+},[tasks])
   
   
   const changeHandler = (e)=>{
 setTask(e.target.value);
   }
-  // handle above removeHandler
- const removeHandler = (id)=>{
+
+  const editHandler=()=>{
+    alert('edit')
+  }
+  const removeHandler = (id)=>{
   if(window.confirm){
     const filteredTasks = tasks.filter((t)=> t.id !== id);
     setTasks(filteredTasks);
@@ -27,8 +41,14 @@ setTask(e.target.value);
  }
  const submitHandler = (e)=>{
   e.preventDefault();
+  if(task.length < 5){
+    setError("تسک خود را وارد کنید. این تسک حداقل 4 حرف باید داشته باشد");
+    
+return false;
+  }
   setTasks([...tasks, {title: task,done: false,created: todayString, id: Date.now()}]);
   setTask("");
+  setError(null)
 }
 
 const doneHandler = (id)=>{
@@ -53,11 +73,12 @@ const unfinishedTasks = (tasks)=>{
   const filteredTasks = tasks.filter((task)=> task.done !== true);
   return filteredTasks.length;
 }
+
   return (
     <div className="App">
       <Header unfinished = {unfinishedTasks(tasks)} finished = {finishedTasks(tasks)} allTasks={tasks.length}/>
-      <NewTodo id={task.id}  change={changeHandler} task={task} submit={submitHandler}/>
-    <TodoList  completed={doneHandler} time={todayString} id={task.id} remove={removeHandler} title={task} tasks={tasks} />
+      <NewTodo error={error} id={task.id}  change={changeHandler} task={task} submit={submitHandler}/>
+    <TodoList edit={editHandler}  completed={doneHandler} time={todayString} id={task.id} remove={removeHandler} title={task} tasks={tasks} />
     </div>
   );
 }

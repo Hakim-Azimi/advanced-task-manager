@@ -1,7 +1,7 @@
 import "./list.css";
 
 import { useEffect } from "react";
-const Todolist = ({completed, time, tasks, remove }) => {
+const Todolist = ({completed, time, tasks, remove, edit }) => {
   useEffect(() => {
     console.log(tasks);
   }, [tasks]);
@@ -20,6 +20,7 @@ const Todolist = ({completed, time, tasks, remove }) => {
               <div className="list-btns">
                 <button onClick={() => completed(todo.id)}>{todo.done? "بازگردانی": "انجام شد"} </button>
                 <button onClick={() => remove(todo.id)}>حذف </button>
+                <button onClick={() => edit(todo.id)}>ویرایش </button>
               </div>
             </div>
           );
