@@ -30,6 +30,7 @@ setTask(e.target.value);
   setTasks([...tasks, {title: task,done: false,created: todayString, id: Date.now()}]);
   setTask("");
 }
+
 const doneHandler = (id)=>{
   const index = tasks.findIndex((item)=> item.id === id);
   const updatedTasks = [...tasks];
@@ -42,11 +43,15 @@ const doneHandler = (id)=>{
 
   }
   setTasks(updatedTasks);
-  console.log(updatedTasks)
+  
+}
+const finishedTasks = (tasks)=>{
+  const filteredTasks =tasks.filter((task)=> task.done === true);
+  return filteredTasks.length;
 }
   return (
     <div className="App">
-      <Header/>
+      <Header finished = {finishedTasks(tasks)} allTasks={tasks.length}/>
       <NewTodo id={task.id}  change={changeHandler} task={task} submit={submitHandler}/>
     <TodoList  completed={doneHandler} time={todayString} id={task.id} remove={removeHandler} title={task} tasks={tasks} />
     </div>

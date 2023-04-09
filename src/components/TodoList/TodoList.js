@@ -10,13 +10,15 @@ const Todolist = ({completed, time, tasks, remove }) => {
       {tasks &&
         tasks.map((todo) => {
           return (
-            <div className="list" key={todo.id}>
+            <div className={todo.done? "list list-done" :"list"} key={todo.id}>
               <div className="list-title">{todo.title}</div>
-              created in {time}
+             <span className="time">
+             ایجاد شده در {time}
+             </span>
               
               <div className="list-btns">
-                <button onClick={() => completed(todo.id)}>{todo.done? "undo": "done"} </button>
-                <button onClick={() => remove(todo.id)}>remove </button>
+                <button onClick={() => completed(todo.id)}>{todo.done? "بازگردانی": "انجام شد"} </button>
+                <button onClick={() => remove(todo.id)}>حذف </button>
               </div>
             </div>
           );
