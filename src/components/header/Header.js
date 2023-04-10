@@ -1,5 +1,5 @@
 import "./header.css";
-const Header = ({ allTasks, finished, unfinished }) => {
+const Header = ({ allTasks, finished, unfinished, tasks }) => {
   const clickHandler = (name) => {
     if (name === "allTasks") {
       alert(`امروز ${allTasks} کار را وارد کرده ای`);
@@ -9,7 +9,9 @@ const Header = ({ allTasks, finished, unfinished }) => {
       alert(`برای امروز ${unfinished} کار دیگر برای انجام دادن داری`);
     }
   };
-  
+ const allTasksShow =()=>{
+  alert()
+ }
 
   return (
     
